@@ -34,7 +34,22 @@ main
 {
     padding: 20px 0;
     flex: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+main[dir="1"]
+{
+    opacity: 0;
+    transform: translateX(-100%);
+    overflow-y: hidden;
+}
+
+main[dir="-1"]
+{
+    opacity: 0;
+    transform: translateX(100%);
+    overflow-y: hidden;
 }
 
 #quote
@@ -62,6 +77,20 @@ main
     width: 100%;
     object-fit: contain;
     filter: drop-shadow(40px -20px 0px #0f4135aa) drop-shadow(-20px -20px 0px #00f39baa);
+    transition: transform 0.125s, opacity 0.25s;
+}
+
+[moved="1"] #fpic
+{
+    transition: transform 0.0625s, opacity 0.125s;
+}
+
+#fpic[on="0"]
+{
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transform: translateY(-80px) rotate(10deg);
 }
 
 #mpic
@@ -74,7 +103,6 @@ main
 
 #info
 {
-    height: 100%;
     background: linear-gradient(
         rgb(15, 65, 53, 0.5),
         rgb(19, 44, 38, 0.5)
@@ -85,10 +113,18 @@ main
     border-top: 8px rgb(15, 65, 53, 0.5);
     border-bottom: 8px rgb(19, 44, 38, 0.5);
     border-style: dashed none;
-    height: auto;
     corner-shape: bevel;
     margin-right: 20px;
     width: 100%;
+    height: auto;
+}
+
+#info[on="0"]
+{
+    animation: 1s blink alternate infinite;
+    overflow: clip;
+    user-select: none;
+    height: 50vh;
 }
 
 #stats
@@ -101,12 +137,26 @@ main
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 10px 50px 20px 20px
+    margin: 10px 50px 20px 20px;
 }
 
 #stats > div
 {
     display: flex;
+    transition: transform 0.125s, opacity 0.25s;
+}
+
+[moved="1"] #stats > div
+{
+    transition: transform 0.0625s, opacity 0.125s;
+}
+
+#stats > [on="0"]
+{
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transform: translateX(100px);
 }
 
 #stats span
@@ -136,6 +186,18 @@ main
 {
     border-top-right-radius: 20px;
     corner-shape: bevel;
+    transition: transform 0.25s;
+    transform-origin: left;
+}
+
+[moved="1"] #stats .bar div
+{
+    transition: transform 0.125s;
+}
+
+#stats > [on="0"] .bar div
+{
+    transform: scaleX(0);
 }
 
 #name

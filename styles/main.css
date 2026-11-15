@@ -44,6 +44,7 @@ body
     font-family: "Syne", sans-serif;
     font-weight: 1000;
     font-size: 20px;
+    overflow: clip;
 }
 
 #bggrain
@@ -66,8 +67,25 @@ img
     user-select: none;
 }
 
-.faded
+[afade="0"] .faded
+{
+    transition: opacity 0.25s;
+}
+
+[afade="0"][moved="1"] .faded
+{
+    transition: opacity 0.125s;
+}
+
+.faded[on="0"]
 {
     opacity: 0;
-    transition: opacity 0.125s;
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes blink
+{
+    from { opacity: 1; }  
+    to { opacity: 0.5; }  
 }

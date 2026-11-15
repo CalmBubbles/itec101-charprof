@@ -15,20 +15,25 @@ const statColors = [
     "#73fe33, #05761b"
 ];
 
+let index = 0;
+let abortLoad = false;
+let animScale = 1;
 let chars = null;
 
-async function view (index)
+async function view ()
 {
     const charReq = await fetch(`data/chars/${chars[index]}.json`);
     const char = await charReq.json();
+
+    
 
     fpic.style.imageRendering = char.fpixel ? "pixelated" : "";
     fpic.src = `img/char/${chars[index]}/full.png`;
     mpic.style.imageRendering = char.mpixel ? "pixelated" : "";
     mpic.src = `img/char/${chars[index]}/min.png`;
 
-    if (!fpic.complete) await new Promise(resolve => fpic.onload = resolve);
-    if (!mpic.complete) await new Promise(resolve => mpic.onload = resolve);
+    await Loop.Wait(() => (fpic.complete && mpic.complete) || abortLoad);
+    if (abortLoad) return;
 
     fname.textContent = char.fname;
     lname.textContent = char.lname;
@@ -44,9 +49,42 @@ async function view (index)
         adj.append(span);
     }
 
-    const stats = Object.entries(char.stats);
+    const statEntries = Object.entries(char.stats);
+    const statElements = [];
     clearStats();
-    for (let i = 0; i < stats.length; i++) addStat(stats[i][0], stats[i][1]);
+    for (let i = 0; i < statEntries.length; i++) statElements.push(addStat(statEntries[i][0], statEntries[i][1]));
+
+
+    info.setAttribute("on", 1);
+
+    fname.setAttribute("on", 1);
+    await Loop.Delay(0.3 * animScale);
+    if (abortLoad) return;
+    lname.setAttribute("on", 1);
+    await Loop.Delay(0.2 * animScale);
+    if (abortLoad) return;
+    from.setAttribute("on", 1);
+    fpic.setAttribute("on", 1);
+    await Loop.Delay(0.3 * animScale);
+    if (abortLoad) return;
+    quote.setAttribute("on", 1);
+    await Loop.Delay(0.3 * animScale);
+    if (abortLoad) return;
+
+    for (let i = 0; i < statElements.length; i++)
+    {
+        statElements[i].setAttribute("on", 1);
+        await Loop.Delay(0.1 * animScale);
+        if (abortLoad) return;
+    }
+
+    desc.setAttribute("on", 1);
+    await Loop.Delay(0.1 * animScale);
+    if (abortLoad) return;
+    adj.setAttribute("on", 1);
+    await Loop.Delay(0.1 * animScale);
+    if (abortLoad) return;
+    mpic.setAttribute("on", 1);
 }
 
 function clearStats ()
@@ -57,6 +95,7 @@ function clearStats ()
 function addStat (id, value)
 {
     const content = document.createElement("div");
+    content.setAttribute("on", 0);
 
     const icon = document.createElement("img");
     icon.src = `img/stats/${availStats.includes(id) ? id : "spc"}.svg`;
@@ -86,13 +125,68 @@ function addStat (id, value)
     content.append(valText);
 
     stats.append(content);
+
+    return content;
 }
+
+async function move (dir)
+{
+    if (animScale === 1)
+    {
+        animScale = 0.5;
+        main.setAttribute("moved", 1);
+    }
+
+    main.setAttribute("dir", dir);
+
+    await Loop.Delay(0.125);
+
+    main.style.transition = "none";
+    main.setAttribute("dir", dir * -1);
+    main.setAttribute("afade", 1);
+    
+    info.setAttribute("on", 0);
+    fname.setAttribute("on", 0);
+    lname.setAttribute("on", 0);
+    from.setAttribute("on", 0);
+    quote.setAttribute("on", 0);
+    desc.setAttribute("on", 0);
+    adj.setAttribute("on", 0);
+    mpic.setAttribute("on", 0);
+
+    fpic.style.transition = "none";
+    fpic.setAttribute("on", 0);
+
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    main.style.transition = "";
+    main.setAttribute("dir", dir * 0);
+
+    main.setAttribute("afade", 0);
+    fpic.style.transition = "";
+
+    index += dir;
+    if (index < 0) index = chars.length - 1;
+    else if (index > chars.length - 1) index = 0;
+
+    window.history.pushState({ }, "", `view?c=${index}`);
+
+    await view();
+}
+
+lnav.onclick = () => move(-1);
+rnav.onclick = () => move(1);
 
 window.onload = async () => {
     const charsReq = await fetch("data/data.json");
     chars = await charsReq.json();
 
     const params = new URLSearchParams(window.location.search);
-    const char = params.get("c") ?? params.get("char") ?? 0;
-    view(char);
+    index = parseInt(params.get("c") ?? params.get("char"));
+
+    if (isNaN(index)) index = 0;
+
+    window.history.replaceState(null, "", `view?c=${index}`);
+
+    view();
 };
