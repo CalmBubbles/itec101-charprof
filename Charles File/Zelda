@@ -1,0 +1,21 @@
+{
+    "fname": "Zelda",
+    "lname": "Hyrule",
+    "from": "The Legend Of Zelda: Breath of the Wild And Tears of the Kingdom",
+    "quote": "Open your eyes.",
+    "desc": "From the game The Legend of Zelda: Breath of the Wild and Tears of the Kingdom, Zelda, a female Hylian, is the princess of Hyrule and a scholar of Sheikah technology. She lost her mother young and struggled for years to awaken the sealing power her bloodline demanded. When the Calamity struck, she held Calamity Ganon at bay inside Hyrule Castle for 100 years while Link slept. In Tears of the Kingdom, she swallows the Secret Stone, is carried into the distant past, and becomes the Light Dragon to guide Link and defeat Ganondorf.",
+    "gender": "Female",
+    "adj": [
+        "Brilliant",
+        "Determined",
+        "Self-Critical"
+    ],
+    "stats": {
+        "str": 40,
+        "int": 100,
+        "chr": 80,
+        "def": 70,
+        "agi": 50,
+        "lck": 30
+    }
+}
