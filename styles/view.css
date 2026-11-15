@@ -1,0 +1,104 @@
+body
+{
+    display: flex;
+    height: 100%;
+}
+
+body > img
+{
+    margin: 30px;
+    width: 40px;
+}
+
+main
+{
+    padding: 20px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+#quote
+{
+    font-size: 24px;
+    margin: 20px 20px 30px;
+}
+
+#details
+{
+    display: flex;
+}
+
+#pic
+{
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-shrink: 0;
+    position: relative;
+}
+
+#fpic
+{
+    width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(40px -20px 0px #0f4135aa) drop-shadow(-20px -20px 0px #00f39baa);
+}
+
+#mpic
+{
+    position: absolute;
+    bottom: 0;
+    filter: drop-shadow(20px -20px 0px #132c26aa);
+    width: 120px;
+}
+
+#info
+{
+    height: 100%;
+    background: linear-gradient(
+        rgb(15, 65, 53, 0.5),
+        rgb(19, 44, 38, 0.5)
+    );
+    padding: 20px;
+    border-top-right-radius: 67px;
+    border-bottom-left-radius: 67px;
+    border-top: 8px rgb(15, 65, 53, 0.5);
+    border-bottom: 8px rgb(19, 44, 38, 0.5);
+    border-style: dashed none;
+    height: auto;
+    corner-shape: bevel;
+}
+
+#stats
+{
+    font-family: "Courier New", monospace;
+    /* background: red; */
+    max-width: 400px;
+}
+
+#stats > div
+{
+    display: flex;
+}
+
+#name
+{
+    font-family: "Archivo Black", sans-serif;
+    font-size: 50px;
+    transform: translateX(-100px);
+    text-shadow: 20px -10px 0px #00f39b42;
+}
+
+#from
+{
+    transform: translateX(100px);
+    width: fit-content;
+    font-size: 30px;
+}
+
+#desc
+{
+    margin: 20px 50px;
+    text-indent: 40px;
+    text-align: justify;
+}
