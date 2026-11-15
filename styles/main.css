@@ -1,5 +1,37 @@
-html
-{ height: 100%; }
+:not(::-webkit-scrollbar)
+{
+    scrollbar-color: #00f39b transparent;
+}
+
+::-webkit-scrollbar
+{
+    width: 8px;
+    height: 8px;
+}
+
+:hover > ::-webkit-scrollbar-thumb
+{
+    background: rgba(223, 223, 223, 0.5);
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+    background: #dfdfdf;
+}
+
+::-webkit-scrollbar-corner
+{
+    background: none;
+}
+
+::selection
+{
+    color: #171717;
+    background: #dfdfdf;
+}
+
+html { height: 100%; }
 
 body
 {
@@ -27,3 +59,15 @@ body
     height: 100%;
     z-index: -1000;
 }
+
+img
+{
+    pointer-events: none;
+    user-select: none;
+}
+
+/* .faded
+{
+    opacity: 0;
+    transition: opacity 0.125s;
+} */

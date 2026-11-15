@@ -1,6 +1,6 @@
 {
     "fname": "Asta",
-    "lname": "Unknown",
+    "lname": "",
     "from": "Black Clover",
     "quote": "My magic is never giving up!",
     "desc": " A young Magic Knight who aims to become the Wizard King despite having no magic.",
@@ -17,5 +17,7 @@
         "def": 95,
         "agi": 100,
         "lck": 80
-    }
+    },
+    "fpixel": false,
+    "mpixel": false
 }

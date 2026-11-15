@@ -1,6 +1,6 @@
 {
     "fname": "Felicity AKA \"Carro\" ",
-    "lname": "None",
+    "lname": "",
     "from": "Dear diary",
     "quote": "LETS GET CRAAAZYYYYYY!!!!!!!!",
     "desc": "A wandering thief that does dangerous things for the thrill of it",
@@ -17,5 +17,7 @@
         "def": 43,
         "agi": 95,
         "lck": 86
-    }
+    },
+    "fpixel": false,
+    "mpixel": false
 }

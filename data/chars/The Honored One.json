@@ -17,5 +17,7 @@
         "def": "Infinity",
         "agi": 100,
         "lck": 90
-    }
+    },
+    "fpixel": false,
+    "mpixel": false
 }
