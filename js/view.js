@@ -19,11 +19,11 @@ let chars = null;
 
 async function view (index)
 {
-    const charReq = await fetch(`../data/chars/${chars[index]}.json`);
+    const charReq = await fetch(`data/chars/${chars[index]}.json`);
     const char = await charReq.json();
 
-    fpic.src = `../img/char/${chars[index]}/full.png`;
-    mpic.src = `../img/char/${chars[index]}/min.png`;
+    fpic.src = `img/char/${chars[index]}/full.png`;
+    mpic.src = `img/char/${chars[index]}/min.png`;
 
     fname.textContent = char.fname;
     lname.textContent = char.lname;
@@ -54,7 +54,7 @@ function addStat (id, value)
     const content = document.createElement("div");
 
     const icon = document.createElement("img");
-    icon.src = `../img/stats/${availStats.includes(id) ? id : "spc"}.svg`;
+    icon.src = `img/stats/${availStats.includes(id) ? id : "spc"}.svg`;
 
     const label = document.createElement("span");
     label.append(id.toUpperCase());
@@ -84,7 +84,7 @@ function addStat (id, value)
 }
 
 window.onload = async () => {
-    const charsReq = await fetch("../data/data.json");
+    const charsReq = await fetch("data/data.json");
     chars = await charsReq.json();
 
     const params = new URLSearchParams(window.location.search);
