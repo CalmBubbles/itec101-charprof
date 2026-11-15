@@ -4,10 +4,30 @@ body
     height: 100%;
 }
 
-body > img
+#lnav, #rnav
 {
-    margin: 30px;
-    width: 40px;
+    margin: auto 20px;
+    cursor: pointer;
+}
+
+#lnav img,
+#rnav img
+{
+    width: 50px;
+    opacity: 0.5;
+    transition: transform 0.25s;
+}
+
+#lnav:hover img
+{
+    transform: translateX(10px);
+    opacity: 1;
+}
+
+#rnav:hover img
+{
+    transform: translateX(-10px);
+    opacity: 1;
 }
 
 main
@@ -20,7 +40,7 @@ main
 #quote
 {
     font-size: 24px;
-    margin: 20px 20px 30px;
+    margin-left: 20px;
 }
 
 #details
@@ -67,18 +87,55 @@ main
     border-style: dashed none;
     height: auto;
     corner-shape: bevel;
+    margin-right: 20px;
+    width: 100%;
 }
 
 #stats
 {
     font-family: "Courier New", monospace;
-    /* background: red; */
-    max-width: 400px;
+    font-weight: bold;
+    max-width: 420px;
+    margin-right: 50px;
+    color: #00feb4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 50px 20px 20px
 }
 
 #stats > div
 {
     display: flex;
+}
+
+#stats span
+{
+    display: block;
+    margin: auto 8px;
+    margin-right: 12px;
+}
+
+#stats .bar
+{
+    background: #00000067;
+    width: 100%;
+    height: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 16px;
+    margin: auto;
+    corner-shape: bevel;
+    display: flex;
+    position: relative;
+    overflow: clip;
+}
+
+#stats .bar div
+{
+    border-top-right-radius: 20px;
+    corner-shape: bevel;
 }
 
 #name
@@ -87,6 +144,7 @@ main
     font-size: 50px;
     transform: translateX(-100px);
     text-shadow: 20px -10px 0px #00f39b42;
+    color: #A7E4CE;
 }
 
 #from
@@ -98,7 +156,30 @@ main
 
 #desc
 {
-    margin: 20px 50px;
+    margin: 20px 20px 20px 50px;
     text-indent: 40px;
     text-align: justify;
+}
+
+#adj
+{
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 10px;
+    font-size: 16px;
+}
+
+#adj span
+{
+    background: #0f4135aa;
+    padding: 6px 10px;
+}
+
+#top
+{
+    display: flex;
+    gap: 20px;
+    margin: 20px 20px 30px;
 }

@@ -6,6 +6,14 @@ const availStats = [
     "agi",
     "lck"
 ];
+const statColors = [
+    "#ec3e28, #960e07",
+    "#02fbff, #003f98",
+    "#b841fd, #65169a",
+    "#efb62e, #c67013",
+    "#effe34, #ad9612",
+    "#73fe33, #05761b"
+];
 
 let chars = null;
 
@@ -51,13 +59,27 @@ function addStat (id, value)
     const label = document.createElement("span");
     label.append(id.toUpperCase());
 
-    const bar = document.createElement("div");
-    const barVal = document.createElement("div");
-    const barText = document.createElement("span");
-    barText.textContent = value;
-    bar.append(barVal, barText);
+    content.append(icon, label);
+    
+    const isNum = typeof value === "number";
 
-    content.append(icon, label, bar);
+    if (isNum)
+    {
+        const bar = document.createElement("div");
+        bar.classList.add("bar");
+
+        const barVal = document.createElement("div");
+        barVal.style.width = `${value}%`;
+        barVal.style.background = `linear-gradient(to right, ${statColors[availStats.indexOf(id)]})`;
+        bar.append(barVal);
+
+        content.append(bar);
+    }
+
+    const valText = document.createElement("span");
+    valText.textContent = isNum ? `${value}%` : value;
+    content.append(valText);
+
     stats.append(content);
 }
 
