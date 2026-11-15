@@ -145,12 +145,15 @@ main
     transform: translateX(-100px);
     text-shadow: 20px -10px 0px #00f39b42;
     color: #A7E4CE;
+    vertical-align: top;
 }
 
 #from
 {
     transform: translateX(100px);
     width: fit-content;
+    margin-right: 140px;
+    position: relative;
     font-size: 30px;
 }
 

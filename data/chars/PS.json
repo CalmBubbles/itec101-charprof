@@ -17,5 +17,7 @@
         "def": 35,
         "agi": 75,
         "lck": 60
-    }
+    },
+    "fpixel": true,
+    "mpixel": true
 }

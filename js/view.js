@@ -22,8 +22,13 @@ async function view (index)
     const charReq = await fetch(`data/chars/${chars[index]}.json`);
     const char = await charReq.json();
 
+    fpic.style.imageRendering = char.fpixel ? "pixelated" : "";
     fpic.src = `img/char/${chars[index]}/full.png`;
+    mpic.style.imageRendering = char.mpixel ? "pixelated" : "";
     mpic.src = `img/char/${chars[index]}/min.png`;
+
+    if (!fpic.complete) await new Promise(resolve => fpic.onload = resolve);
+    if (!mpic.complete) await new Promise(resolve => mpic.onload = resolve);
 
     fname.textContent = char.fname;
     lname.textContent = char.lname;
