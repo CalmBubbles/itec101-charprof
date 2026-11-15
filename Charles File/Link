@@ -1,0 +1,21 @@
+{
+    "fname": "Link",
+    "lname": "(Unknown)",
+    "from": "The Legend Of Zelda: Breath of the Wild",
+    "quote": "...",
+    "desc": "From the game The Legend of Zelda: Breath of the Wild and Tears of the Kingdom, Link, a male Hylian, is the appointed knight of Princess Zelda and the chosen wielder of the Master Sword. He was gravely wounded protecting Zelda during the Calamity 100 years ago, then slept in the Shrine of Resurrection and woke with no memory. He has since climbed, glided, and fought across Hyrule to defeat Calamity Ganon. In Tears of the Kingdom, the Zonai powers in his new right arm let him build, fuse, and rewind his way past the Upheaval and the Demon King.",
+    "gender": "Male",
+    "adj": [
+        "Silent",
+        "Courageous",
+        "Resourceful"
+    ],
+    "stats": {
+        "str": 80,
+        "int": 60,
+        "chr": 50,
+        "def": 60,
+        "agi": 90,
+        "lck": 50
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "fname": "Asta",
+    "lname": "Unknown",
+    "from": "Black Clover by Yusuke Murata",
+    "quote": "My magic is never giving up!",
+    "desc": " A young Magic Knight who aims to become the Wizard King despite having no magic.",
+    "gender": "Male",
+    "adj": [
+        "Determined",
+        "Energetic",
+        "Courageous"
+    ],
+    "stats": {
+        "str": 100,
+        "int": 80,
+        "chr": 90,
+        "def": 95,
+        "agi": 100,
+        "lck": 80
+    }
+}
