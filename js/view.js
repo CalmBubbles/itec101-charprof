@@ -17,6 +17,8 @@ const statColors = [
 
 let index = 0;
 let abortLoad = false;
+let lKeyActive = false;
+let rKeyActive = false;
 let animScale = 1;
 let chars = null;
 
@@ -170,6 +172,43 @@ async function move (dir)
 
 lnav.onclick = () => move(-1);
 rnav.onclick = () => move(1);
+
+window.addEventListener("keydown", event => {
+    if (!(["ArrowLeft", "ArrowRight"]).includes(event.key)) return;
+
+    event.preventDefault();
+
+    switch (event.key)
+    {
+        case "ArrowLeft":
+            if (!lKeyActive) move(-1);
+            lKeyActive = true;
+            break;
+        case "ArrowRight":
+            if (!rKeyActive) move(1);
+            rKeyActive = true;
+            break;
+    }
+});
+window.addEventListener("keyup", event => {
+    if (!(["ArrowLeft", "ArrowRight"]).includes(event.key)) return;
+
+    event.preventDefault();
+
+    switch (event.key)
+    {
+        case "ArrowLeft":
+            lKeyActive = false;
+            break;
+        case "ArrowRight":
+            rKeyActive = false;
+            break;
+    }
+});
+window.addEventListener("blur", () => {
+    lKeyActive = false;
+    rKeyActive = false;
+});
 
 window.onload = async () => {
     const charsReq = await fetch("data/data.json");
