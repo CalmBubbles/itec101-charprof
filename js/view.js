@@ -25,8 +25,6 @@ async function view ()
     const charReq = await fetch(`data/chars/${chars[index]}.json`);
     const char = await charReq.json();
 
-    
-
     fpic.style.imageRendering = char.fpixel ? "pixelated" : "";
     fpic.src = `img/char/${chars[index]}/full.png`;
     mpic.style.imageRendering = char.mpixel ? "pixelated" : "";
@@ -41,7 +39,6 @@ async function view ()
     mfrom.textContent = char.from;
     desc.textContent = char.desc;
 
-    while (adj.firstChild != null) adj.firstChild.remove();
     for (let i = 0; i < char.adj.length; i++)
     {
         const span = document.createElement("span");
@@ -51,7 +48,6 @@ async function view ()
 
     const statEntries = Object.entries(char.stats);
     const statElements = [];
-    clearStats();
     for (let i = 0; i < statEntries.length; i++) statElements.push(addStat(statEntries[i][0], statEntries[i][1]));
 
 
@@ -85,11 +81,6 @@ async function view ()
     await Loop.Delay(0.1 * animScale);
     if (abortLoad) return;
     mpic.setAttribute("on", 1);
-}
-
-function clearStats ()
-{
-    while (stats.firstChild != null) stats.firstChild.remove();
 }
 
 function addStat (id, value)
@@ -156,6 +147,9 @@ async function move (dir)
 
     fpic.style.transition = "none";
     fpic.setAttribute("on", 0);
+
+    while (adj.firstChild != null) adj.firstChild.remove();
+    while (stats.firstChild != null) stats.firstChild.remove();
 
     await new Promise(resolve => requestAnimationFrame(resolve));
 
