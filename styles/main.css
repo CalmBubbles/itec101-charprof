@@ -66,8 +66,8 @@ img
     user-select: none;
 }
 
-/* .faded
+.faded
 {
     opacity: 0;
     transition: opacity 0.125s;
-} */
+}
