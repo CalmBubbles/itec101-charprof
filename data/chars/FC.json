@@ -1,0 +1,21 @@
+{
+    "fname": "Felicity AKA \"Carro\" ",
+    "lname": "None",
+    "from": "Dear diary by CalmBubbles",
+    "quote": "LETS GET CRAAAZYYYYYY!!!!!!!!",
+    "desc": "A wandering thief that does dangerous things for the thrill of it",
+    "gender": "Female",
+    "adj": [
+        "Hungry",
+        "Slick",
+        "Stupid"
+    ],
+    "stats": {
+        "str": 83,
+        "int": 30,
+        "chr": 67,
+        "def": 43,
+        "agi": 95,
+        "lck": 86
+    }
+}

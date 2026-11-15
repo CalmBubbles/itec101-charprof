@@ -1,0 +1,21 @@
+{
+    "fname": "Gojo Satoru",
+    "lname": "Satoru Gojo",
+    "from": "Jujutsu Kaisen by Gege Akutami",
+    "quote": "I am the strongest in the world.",
+    "desc": "A powerful Jujutsu Sorcerer who protects humanity from cursed spirits and trains the next generation of sorcerers.",
+    "gender": "Male",
+    "adj": [
+        "Confident",
+        "Playful",
+        "Charismatic"
+    ],
+    "stats": {
+        "str": 100,
+        "int": 100,
+        "chr": 100,
+        "def": "Infinity",
+        "agi": 100,
+        "lck": 90
+    }
+}

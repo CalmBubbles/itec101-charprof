@@ -1,0 +1,21 @@
+{
+    "fname": "",
+    "lname": "",
+    "from": "",
+    "quote": "",
+    "desc": "",
+    "gender": "",
+    "adj": [
+        "",
+        "",
+        ""
+    ],
+    "stats": {
+        "str": 0,
+        "int": 0,
+        "chr": 0,
+        "def": 0,
+        "agi": 0,
+        "lck": 0
+    }
+}

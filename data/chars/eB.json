@@ -1,0 +1,21 @@
+{
+    "fname": "John",
+    "lname": "Egbert",
+    "from": "Homestuck",
+    "quote": "i discovered a comet that is going to destroy the earth, and it was named after me.",
+    "desc": "A young, nerdy boy with a passion for really terrible movies, magic, and programming. Quick to adapt and learn, if a little airheaded. He will do whatever is necessary for everyone's sake, like a real hero!",
+    "gender": "male",
+    "adj": [
+        "ADAPTIVE",
+        "BREEZY",
+        "UNBOUND"
+    ],
+    "stats": {
+        "str": 60,
+        "int": 45,
+        "chr": 45,
+        "def": 35,
+        "agi": 55,
+        "lck": 75
+    }
+}

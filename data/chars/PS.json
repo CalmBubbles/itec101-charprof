@@ -1,0 +1,21 @@
+{
+    "fname": "Problem",
+    "lname": "Sleuth",
+    "from": "Problem Sleuth",
+    "quote": "Slow down, slow down sweetheart. Let's start with what's important about your problem, yeah?",
+    "desc": "One of the most esteemed and hard-boiled detectives of 1922 Noir's broad city. His services, often solicited, and compensated for adequately. As it stands, there are dames to be saved. And so shall he act.",
+    "gender": "male",
+    "adj": [
+        "DRIVEN",
+        "STUBBORN",
+        "CHARMING"
+    ],
+    "stats": {
+        "str": 50,
+        "int": 45,
+        "chr": 80,
+        "def": 35,
+        "agi": 75,
+        "lck": 60
+    }
+}
