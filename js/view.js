@@ -16,7 +16,7 @@ const statColors = [
 ];
 
 let index = 0;
-let abortLoad = false;
+let abortLoad = -1;
 let lKeyActive = false;
 let rKeyActive = false;
 let animScale = 1;
@@ -24,16 +24,24 @@ let chars = null;
 
 async function view ()
 {
+    targetIndex = index;
+
+    if (targetIndex === abortLoad) return;
+
     const charReq = await fetch(`data/chars/${chars[index]}.json`);
     const char = await charReq.json();
+
+    if (targetIndex === abortLoad) return;
 
     fpic.style.imageRendering = char.fpixel ? "pixelated" : "";
     fpic.src = `img/char/${chars[index]}/full.png`;
     mpic.style.imageRendering = char.mpixel ? "pixelated" : "";
     mpic.src = `img/char/${chars[index]}/min.png`;
 
-    await Loop.Wait(() => (fpic.complete && mpic.complete) || abortLoad);
-    if (abortLoad) return;
+    // await Loop.Delay(1);
+
+    await Loop.Wait(() => targetIndex === abortLoad || (fpic.complete && mpic.complete));
+    if (targetIndex === abortLoad) return;
 
     fname.textContent = char.fname;
     lname.textContent = char.lname;
@@ -57,34 +65,34 @@ async function view ()
 
     fname.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
     lname.setAttribute("on", 1);
     
     document.title = `${char.fname} ${char.lname} — Convexgence`;
     
     await Loop.Delay(0.2 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
     from.setAttribute("on", 1);
     fpic.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
     quote.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
 
     for (let i = 0; i < statElements.length; i++)
     {
         statElements[i].setAttribute("on", 1);
         await Loop.Delay(0.1 * animScale);
-        if (abortLoad) return;
+        if (targetIndex === abortLoad) return;
     }
 
     desc.setAttribute("on", 1);
     await Loop.Delay(0.1 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
     adj.setAttribute("on", 1);
     await Loop.Delay(0.1 * animScale);
-    if (abortLoad) return;
+    if (targetIndex === abortLoad) return;
     mpic.setAttribute("on", 1);
 }
 
@@ -127,6 +135,8 @@ function addStat (id, value)
 
 async function move (dir)
 {
+    abortLoad = index;
+    
     if (animScale === 1)
     {
         animScale = 0.5;
@@ -169,7 +179,6 @@ async function move (dir)
     else if (index > chars.length - 1) index = 0;
 
     window.history.pushState({ }, "", `view?c=${index}`);
-
     await view();
 }
 
