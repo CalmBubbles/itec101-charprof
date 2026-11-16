@@ -150,13 +150,13 @@ footer
         opacity: 1;
     }
 
-    #roster img:not(:active)
+    #roster a:not(:active) img
     {
         transform: scale(120%);
         filter: drop-shadow(30px -40px 0px #00f39baa);
     }
 
-    #roster div:not(:active)
+    #roster a:not(:active) div
     {
         transform: translateY(20px);
     }
