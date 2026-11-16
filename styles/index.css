@@ -145,18 +145,18 @@ footer
 
 @media (hover: none) and (pointer: coarse)
 {
-    #roster a
+    #roster a:not(:active)
     {
         opacity: 1;
     }
 
-    #roster img
+    #roster img:not(:active)
     {
         transform: scale(120%);
         filter: drop-shadow(30px -40px 0px #00f39baa);
     }
 
-    #roster div
+    #roster div:not(:active)
     {
         transform: translateY(20px);
     }
