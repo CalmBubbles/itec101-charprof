@@ -11,7 +11,7 @@ async function addPanel (charID, index)
     const image = document.createElement("img");
     image.classList.add("faded");
     image.setAttribute("on", 0);
-    image.src = `img/char/${charID}/full.png`;
+    image.src = `/itec101-charprof/img/char/${charID}/full.png`;
 
     const name = document.createElement("div");
     name.classList.add("faded");
@@ -22,7 +22,7 @@ async function addPanel (charID, index)
 
     if (charID !== "Null")
     {
-        const charReq = await fetch(`/data/chars/${charID}.json`);
+        const charReq = await fetch(`/itec101-charprof/data/chars/${charID}.json`);
         const char = await charReq.json();
 
         name.textContent = `${char.fname} ${char.lname}`;
@@ -30,7 +30,7 @@ async function addPanel (charID, index)
     else
     {
         name.textContent = "A pumpkin"
-        image.src = "img/char/Null/-.png";
+        image.src = "/itec101-charprof/img/char/Null/-.png";
     }
 
     await Loop.Wait(() => image.complete);
