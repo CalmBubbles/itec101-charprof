@@ -12,7 +12,7 @@ main
 {
     height: 250px;
     width: 100%;
-    margin: 0   auto;
+    margin: 0 auto;
     object-fit: contain;
 }
 
@@ -77,6 +77,14 @@ h1
     position: relative;
 }
 
+#roster a[loaded="0"][on="1"]
+{
+    pointer-events: none;
+    user-select: none;
+    animation: 1s blink alternate infinite;
+    animation-delay: 0.25s;
+}
+
 #roster a:hover
 {
     opacity: 1;
@@ -87,13 +95,13 @@ h1
     width: 100%;
     object-fit: contain;
     filter: drop-shadow(20px -20px 0px #0f4135aa);
-    transition: transform 0.25s, filter 0.25s;
+    transition: transform 0.25s, filter 0.25s, opacity 0.25s;
 }
 
 #roster a:hover img
 {
     transform: scale(120%);
-    filter: drop-shadow(20px -20px 0px #00f39baa);
+    filter: drop-shadow(30px -40px 0px #00f39baa);
 }
 
 #roster div
@@ -112,7 +120,7 @@ h1
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     corner-shape: bevel;
-    transition: transform 0.25s;
+    transition: transform 0.25s, opacity 0.25s;
 }
 
 #roster a:hover div

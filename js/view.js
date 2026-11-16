@@ -16,32 +16,46 @@ const statColors = [
 ];
 
 let index = 0;
-let abortLoad = -1;
+let indexesLoading = [];
+let chars = [];
 let lKeyActive = false;
 let rKeyActive = false;
+let cantMove = false;
 let animScale = 1;
-let chars = null;
 
 async function view ()
 {
-    targetIndex = index;
+    const targetIndex = index;
 
-    if (targetIndex === abortLoad) return;
+    if (indexesLoading.includes(targetIndex)) return;
 
-    const charReq = await fetch(`data/chars/${chars[index]}.json`);
+    indexesLoading.push(targetIndex);
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
+    fpic.src = `img/char/${chars[targetIndex]}/full.png`;
+    mpic.src = `img/char/${chars[targetIndex]}/min.png`;
+
+    const charReq = await fetch(`data/chars/${chars[targetIndex]}.json`);
     const char = await charReq.json();
 
-    if (targetIndex === abortLoad) return;
-
     fpic.style.imageRendering = char.fpixel ? "pixelated" : "";
-    fpic.src = `img/char/${chars[index]}/full.png`;
     mpic.style.imageRendering = char.mpixel ? "pixelated" : "";
-    mpic.src = `img/char/${chars[index]}/min.png`;
 
-    // await Loop.Delay(1);
+    await Loop.Wait(() => index !== targetIndex || (fpic.complete && mpic.complete));
 
-    await Loop.Wait(() => targetIndex === abortLoad || (fpic.complete && mpic.complete));
-    if (targetIndex === abortLoad) return;
+    if (index !== targetIndex)
+    {
+        fpic.src = `img/char/${chars[index]}/full.png`;
+        mpic.src = `img/char/${chars[index]}/min.png`;
+
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
 
     fname.textContent = char.fname;
     lname.textContent = char.lname;
@@ -63,37 +77,88 @@ async function view ()
 
     info.setAttribute("on", 1);
 
+    cname.setAttribute("on", 1);
+    await Loop.Delay(0.1 * animScale);
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     fname.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     lname.setAttribute("on", 1);
     
     document.title = `${char.fname} ${char.lname} — Convexgence`;
     
     await Loop.Delay(0.2 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     from.setAttribute("on", 1);
     fpic.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     quote.setAttribute("on", 1);
     await Loop.Delay(0.3 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
 
     for (let i = 0; i < statElements.length; i++)
     {
         statElements[i].setAttribute("on", 1);
         await Loop.Delay(0.1 * animScale);
-        if (targetIndex === abortLoad) return;
+        
+        if (index !== targetIndex)
+        {
+            indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+            return;
+        }
     }
 
     desc.setAttribute("on", 1);
     await Loop.Delay(0.1 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     adj.setAttribute("on", 1);
     await Loop.Delay(0.1 * animScale);
-    if (targetIndex === abortLoad) return;
+
+    if (index !== targetIndex)
+    {
+        indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
+        return;
+    }
+
     mpic.setAttribute("on", 1);
+
+    indexesLoading.splice(indexesLoading.indexOf(targetIndex), 1);
 }
 
 function addStat (id, value)
@@ -135,8 +200,14 @@ function addStat (id, value)
 
 async function move (dir)
 {
-    abortLoad = index;
-    
+    if (cantMove) return;
+
+    cantMove = true;
+
+    index += dir;
+    if (index < 0) index = chars.length - 1;
+    else if (index > chars.length - 1) index = 0;
+
     if (animScale === 1)
     {
         animScale = 0.5;
@@ -152,6 +223,7 @@ async function move (dir)
     main.setAttribute("afade", 1);
     
     info.setAttribute("on", 0);
+    cname.setAttribute("on", 0);
     fname.setAttribute("on", 0);
     lname.setAttribute("on", 0);
     from.setAttribute("on", 0);
@@ -168,15 +240,13 @@ async function move (dir)
 
     await new Promise(resolve => requestAnimationFrame(resolve));
 
+    cantMove = false;
+
     main.style.transition = "";
     main.setAttribute("dir", dir * 0);
 
     main.setAttribute("afade", 0);
     fpic.style.transition = "";
-
-    index += dir;
-    if (index < 0) index = chars.length - 1;
-    else if (index > chars.length - 1) index = 0;
 
     window.history.pushState({ }, "", `view?c=${index}`);
     await view();
@@ -223,15 +293,15 @@ window.addEventListener("blur", () => {
 });
 
 window.onload = async () => {
-    const charsReq = await fetch("data/data.json");
-    chars = await charsReq.json();
-
     const params = new URLSearchParams(window.location.search);
     index = parseInt(params.get("c") ?? params.get("char"));
 
     if (isNaN(index)) index = 0;
 
     window.history.replaceState(null, "", `view?c=${index}`);
+
+    const charsReq = await fetch("data/data.json");
+    chars = await charsReq.json();
 
     view();
 };
