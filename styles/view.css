@@ -1,9 +1,3 @@
-body
-{
-    display: flex;
-    height: 100%;
-}
-
 #lnav, #rnav
 {
     margin: auto 20px;
@@ -34,6 +28,7 @@ main
 {
     padding: 20px 0;
     flex: 1;
+    overflow-x: clip;
     overflow-y: scroll;
     transition: opacity 0.25s, transform 0.25s;
 }
