@@ -1,5 +1,5 @@
 window.onload = async () => {
-    window.history.replaceState(null, "", "");
+    window.history.replaceState(null, "", "/itec101-charprof");
 
     await Loop.Delay(0.5);
     welcome.setAttribute("on", 1);

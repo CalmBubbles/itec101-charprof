@@ -59,6 +59,9 @@ async function view ()
     await Loop.Delay(0.3 * animScale);
     if (abortLoad) return;
     lname.setAttribute("on", 1);
+    
+    document.title = `${char.fname} ${char.lname} — Convexgence`;
+    
     await Loop.Delay(0.2 * animScale);
     if (abortLoad) return;
     from.setAttribute("on", 1);
