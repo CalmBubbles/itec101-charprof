@@ -22,7 +22,7 @@ async function addPanel (charID, index)
 
     if (charID !== "Null")
     {
-        const charReq = await fetch(`data/chars/${charID}.json`);
+        const charReq = await fetch(`/data/chars/${charID}.json`);
         const char = await charReq.json();
 
         name.textContent = `${char.fname} ${char.lname}`;
