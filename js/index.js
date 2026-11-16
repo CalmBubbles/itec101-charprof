@@ -45,7 +45,7 @@ async function addPanel (charID, index)
 window.onload = async () => {
     window.history.replaceState(null, "", "/itec101-charprof");
 
-    const charsReq = await fetch("data/data.json");
+    const charsReq = await fetch("/itec101-charprof/data/data.json");
     chars = await charsReq.json();
 
     for (let i = 0; i < chars.length; i++) addPanel(chars[i], i);
